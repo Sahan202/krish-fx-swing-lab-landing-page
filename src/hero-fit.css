@@ -1,0 +1,30 @@
+/* Large-screen hero sizing and guaranteed text contrast */
+.hero{min-height:calc(100svh - 32px);height:max(760px,calc(100svh - 32px))}
+.hero{
+  background-image:
+    linear-gradient(90deg,rgba(2,12,32,.96) 0%,rgba(2,30,60,.82) 35%,rgba(2,58,104,.20) 66%,rgba(2,22,48,.04) 100%),
+    url('/krish-fx-hero-4k.png')!important;
+  background-position:center center;
+  background-attachment:fixed;
+}
+.hero-grid{min-height:calc(100% - 139px);align-content:center}
+.hero,.hero h1,.hero h1 i,.hero-grid p,.hero .trust{color:#fff!important}
+.hero h1{max-width:680px;text-shadow:0 3px 18px rgba(0,23,52,.58)}
+.hero-grid p{font-weight:500;text-shadow:0 2px 14px rgba(0,20,47,.8)}
+.hero .trust{color:#d7f5ff!important}
+.hero .eyebrow{color:#00b8fe!important;text-shadow:0 2px 10px #00162c}
+.hero .nav{color:#fff}
+.hero .links button{color:#fff}
+.hero .links .cta{color:#fff}
+
+@media (min-width:1200px){
+  .hero{background-position:center center}
+  .hero-grid{padding-bottom:52px}
+}
+@media (max-width:920px){
+  .hero{height:auto;min-height:720px}
+  .hero-grid{min-height:0}
+}
+@media (max-width:680px){
+  .hero{background-image:linear-gradient(90deg,rgba(2,12,32,.94),rgba(2,35,67,.52)),url('/krish-fx-hero-4k.png')!important;background-position:62% center;background-attachment:scroll}
+}

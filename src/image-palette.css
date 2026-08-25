@@ -1,0 +1,48 @@
+/* Brand palette matched to the supplied Krish FX trading image */
+:root{
+  --krish-navy:#061a3a;
+  --krish-deep:#020c20;
+  --krish-blue:#087ee8;
+  --krish-sky:#51c8ff;
+  --krish-ice:#eaf8ff;
+}
+
+body{background:var(--krish-navy)}
+.hero{
+  background-image:
+    linear-gradient(90deg,rgba(2,12,32,.98) 0%,rgba(3,19,43,.91) 36%,rgba(4,26,58,.36) 65%,rgba(3,16,35,.1) 100%),
+    linear-gradient(0deg,rgba(2,12,32,.48),transparent 43%),
+    url('/krish-fx-main-image.jpeg') !important;
+}
+.brand b,.cta{background:var(--krish-sky);color:var(--krish-deep)}
+.brand i,.eyebrow,.label,.trust svg{color:var(--krish-sky)}
+.hero:before{background:radial-gradient(circle at 80% 25%,rgba(81,200,255,.18),transparent 30%)}
+.cta{box-shadow:0 12px 30px rgba(15,149,255,.28)}
+.cta:hover{background:#9ae3ff;box-shadow:0 18px 38px rgba(15,149,255,.42)}
+.ticker{background:var(--krish-sky);color:var(--krish-deep)}
+
+.intro{color:var(--krish-navy)}
+.intro .label{color:#0873bd}
+.intro h2 i,.curriculum h2 i{color:#087ee8}
+.benefits svg{color:#087ee8}
+.curriculum{background:var(--krish-ice);color:var(--krish-navy)}
+.outline{border-color:#7ebfdf;color:#06315a}
+.outline:hover{background:#d7f2ff}
+.lessons{border-color:#b6d8e8}
+.lessons div{border-color:#b6d8e8}
+.lessons div:hover{background:#d5f1fc}
+.lessons svg{color:#087ee8}
+
+.community{background:linear-gradient(135deg,#061b3d,#0a3964)}
+.community h2 i{color:var(--krish-sky)}
+.community blockquote{background:#0b3155;border:1px solid rgba(81,200,255,.2)}
+.final{background:linear-gradient(135deg,#0a8fe7,#57d0ff);color:var(--krish-deep)}
+.final .label{color:#07518e}
+.final p{color:#093e6b}
+.final .cta{background:var(--krish-deep);color:#f3fbff;box-shadow:none}
+.final:before,.final:after{border-color:rgba(0,55,102,.32)}
+
+@media(max-width:680px){
+  .links.open{background:#061b3d}
+  .hero{background-image:linear-gradient(90deg,rgba(2,12,32,.94),rgba(3,20,44,.58)),linear-gradient(0deg,rgba(2,12,32,.54),transparent 55%),url('/krish-fx-main-image.jpeg') !important}
+}

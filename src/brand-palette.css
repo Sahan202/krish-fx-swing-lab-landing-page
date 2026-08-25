@@ -1,0 +1,14 @@
+/* Krish FX official palette: white, sky blue and orange */
+:root{--brand-white:#FFFFFF;--brand-blue:#00B8FE;--brand-orange:#FD7402;--brand-ink:#063653}
+
+body{background:var(--brand-white);color:var(--brand-ink)}
+.hero{background-image:linear-gradient(90deg,rgba(0,44,76,.93) 0%,rgba(0,72,118,.77) 38%,rgba(0,184,254,.15) 70%,rgba(0,184,254,.04) 100%),url('/krish-fx-main-image.jpeg')!important}
+.brand b,.cta{background:var(--brand-orange);color:var(--brand-white)}
+.brand i,.eyebrow,.label,.trust svg{color:var(--brand-blue)!important}
+.brand small{color:#d5f5ff}.cta{box-shadow:0 13px 28px rgba(253,116,2,.29)}.cta:hover{background:#ff8d24;box-shadow:0 17px 36px rgba(253,116,2,.42)}.watch{color:var(--brand-white)}.ticker{background:var(--brand-blue);color:var(--brand-white)}
+
+.intro{background:var(--brand-white);color:var(--brand-ink)}.intro .label{color:var(--brand-blue)!important}.intro h2 i,.curriculum h2 i{color:var(--brand-orange)}.intro-top p,.benefits p{color:#537285}.benefits svg{color:var(--brand-blue)}.benefits{border-color:#cfeefa}.benefits article+article{border-color:#cfeefa}
+.curriculum{background:#effbff;color:var(--brand-ink)}.outline{color:var(--brand-ink);border-color:var(--brand-blue)}.outline:hover{background:#d7f5ff}.lessons,.lessons div{border-color:#b9eafa}.lessons svg{color:var(--brand-orange)}.lessons div:hover{background:#dff7ff}
+.community{background:linear-gradient(135deg,#007fbb,#00b8fe)}.community h2 i{color:var(--brand-orange)}.community p{color:#ebfaff}.community blockquote{background:#087eb6;border-color:#ffffff66}.final{background:var(--brand-orange);color:var(--brand-white)}.final .label{color:#fff4e9!important}.final p{color:#fff4e9}.final .cta{background:var(--brand-white);color:#e75f00}.final:before,.final:after{border-color:#ffffff45}
+
+@media(max-width:680px){.links.open{background:#007fb8}.hero{background-image:linear-gradient(90deg,rgba(0,42,74,.94),rgba(0,111,174,.58)),url('/krish-fx-main-image.jpeg')!important}}

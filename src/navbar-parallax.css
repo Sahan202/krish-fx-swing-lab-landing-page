@@ -1,0 +1,4 @@
+/* Stronger hero parallax and fixed glass navigation */
+.nav{position:fixed!important;top:0;left:50%;transform:translateX(-50%);width:min(1150px,calc(100% - 44px));z-index:50;margin:0;padding:0 20px;background:rgba(3,18,40,.72);border:1px solid rgba(255,255,255,.18)!important;border-top:0!important;border-radius:0 0 14px 14px;backdrop-filter:blur(16px);box-shadow:0 12px 30px rgba(0,0,0,.24)}
+.hero-grid{padding-top:86px}.hero:after{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(2,15,34,.22),transparent 24%)}.hero-grid,.ticker{position:relative;z-index:1}
+@media(max-width:920px){.nav{width:min(100% - 34px,600px)}.hero-grid{padding-top:96px}}@media(max-width:680px){.nav{width:calc(100% - 26px);padding:0 12px;border-radius:0 0 10px 10px}.links.open{top:68px;left:-1px;right:-1px;border-radius:0 0 10px 10px}.hero-grid{padding-top:84px}}

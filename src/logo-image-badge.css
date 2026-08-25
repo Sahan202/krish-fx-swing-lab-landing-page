@@ -1,0 +1,12 @@
+/* Header brand badge uses the supplied Krish FX visual */
+.brand b{
+  color:transparent!important;
+  background-image:linear-gradient(rgba(0,184,254,.06),rgba(0,184,254,.06)),url('/krish-fx-main-image.jpeg')!important;
+  width:46px;
+  height:46px;
+  background-size:cover;
+  background-position:center;
+  border:1px solid rgba(255,255,255,.85);
+  border-radius:12px;
+  box-shadow:0 4px 14px rgba(0,0,0,.32);
+}

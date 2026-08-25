@@ -1,0 +1,2 @@
+.result-stats{display:flex;gap:15px;flex-wrap:wrap;margin-top:28px}.result-stats span{display:flex;flex-direction:column;gap:4px;padding:12px 15px;background:#ffffff12;border:1px solid #ffffff22;color:#d7f5ff;font-size:11px}.result-stats b{color:#fd7402;font:700 23px 'DM Mono',monospace}
+@media(max-width:560px){.result-stats{gap:9px}.result-stats span{flex:1}}

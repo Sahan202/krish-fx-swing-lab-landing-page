@@ -1,0 +1,7 @@
+/* Premium hero details */
+.hero-insight{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px}
+.hero-insight span{display:flex;align-items:center;gap:7px;padding:8px 10px;background:rgba(2,22,48,.43);border-left:2px solid #00b8fe;color:#dbf6ff;font-size:10px;letter-spacing:.02em;backdrop-filter:blur(5px)}
+.hero-insight b{color:#fd7402;font:700 11px 'DM Mono',monospace}
+.hero h1{font-size:clamp(52px,5.7vw,82px)!important;max-width:710px}
+.hero-grid{position:relative}.hero-grid:before{content:'KRISH FX';position:absolute;top:20%;left:-70px;color:rgba(255,255,255,.035);font:700 145px/1 'DM Sans',sans-serif;letter-spacing:-.09em;pointer-events:none}
+@media(max-width:680px){.hero-grid:before{display:none}.hero-insight{margin-top:24px}.hero-insight span{font-size:9px}.hero h1{font-size:clamp(42px,11vw,57px)!important}}
