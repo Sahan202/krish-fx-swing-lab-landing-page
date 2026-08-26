@@ -66,7 +66,6 @@ function FeedbackShowcase() {
   const startDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     dragStart.current = event.clientX;
     dragged.current = false;
-    event.currentTarget.setPointerCapture(event.pointerId);
   };
   const finishDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     if (dragStart.current === null) return;
