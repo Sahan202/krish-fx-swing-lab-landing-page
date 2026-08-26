@@ -16,8 +16,79 @@ const certificates = [
   { src: '/student-tharinda-phase-2.jpeg', name: 'Tharinda J', achievement: 'FundingPips · Phase II' },
 ];
 
+const feedbackImages = [
+  { src: '/student-feedback-shanaka.jpeg', alt: 'Student feedback message from Shanaka' },
+  ...Array.from({ length: 12 }, (_, index) => ({
+    src: `/student-feedback-${String(index + 1).padStart(2, '0')}.jpeg`,
+    alt: `Krish FX student feedback and trading result ${index + 1}`,
+  })),
+];
+
 function Brand({ onClick }: { onClick?: () => void }) {
   return <button className="brand" onClick={onClick}><b>K</b><span>KRISH <i>FX</i><small>SWING LAB</small></span></button>;
+}
+
+function FeedbackShowcase() {
+  const [activeImage, setActiveImage] = useState<number | null>(null);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isResetting, setIsResetting] = useState(false);
+  const dragStart = useRef<number | null>(null);
+  const dragged = useRef(false);
+  const carouselImages = [...feedbackImages, ...feedbackImages.slice(0, 3)];
+  const currentStory = currentImage % feedbackImages.length;
+
+  useEffect(() => {
+    if (activeImage !== null) return;
+    const timer = window.setInterval(() => setCurrentImage((current) => current + 1), 3800);
+    return () => window.clearInterval(timer);
+  }, [activeImage]);
+
+  useEffect(() => {
+    if (activeImage === null) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setActiveImage(null);
+      if (event.key === 'ArrowLeft') setActiveImage((activeImage + feedbackImages.length - 1) % feedbackImages.length);
+      if (event.key === 'ArrowRight') setActiveImage((activeImage + 1) % feedbackImages.length);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [activeImage]);
+
+  const finishSlide = () => {
+    if (currentImage !== feedbackImages.length) return;
+    setIsResetting(true);
+    setCurrentImage(0);
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => setIsResetting(false)));
+  };
+
+  const showPrevious = () => setCurrentImage((current) => current === 0 ? feedbackImages.length - 1 : current - 1);
+  const showNext = () => setCurrentImage((current) => current >= feedbackImages.length ? 1 : current + 1);
+  const startDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    dragStart.current = event.clientX;
+    dragged.current = false;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+  const finishDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (dragStart.current === null) return;
+    const distance = event.clientX - dragStart.current;
+    dragStart.current = null;
+    if (Math.abs(distance) < 45) return;
+    dragged.current = true;
+    if (distance < 0) showNext(); else showPrevious();
+  };
+
+  return <>
+    <div className="final-cta feedback-showcase">
+      <div className="feedback-heading"><div className="feedback-copy"><span className="label">STUDENT FEEDBACK</span><h2>Words that <i>mean everything.</i></h2><p>Real progress is more than a result on a chart. It is the confidence, clarity and gratitude our students carry forward.</p></div><div className="feedback-proof"><strong>{feedbackImages.length}</strong><span>Real student stories</span><small>Four stories in view</small></div></div>
+      <div className="feedback-carousel" onPointerDown={startDrag} onPointerUp={finishDrag} onPointerCancel={() => { dragStart.current = null; }}>
+        <div className="feedback-gallery" aria-label="Autoplaying student feedback carousel"><div className={`feedback-track${isResetting ? ' resetting' : ''}`} style={{ '--feedback-index': currentImage } as React.CSSProperties} onTransitionEnd={finishSlide}>{carouselImages.map((image, index) => { const storyIndex = index % feedbackImages.length; return <button className="feedback-card" type="button" key={`${image.src}-${index}`} onClick={() => { if (dragged.current) { dragged.current = false; return; } setActiveImage(storyIndex); }} aria-label={`Open student feedback ${storyIndex + 1}`}><img src={image.src} alt={image.alt} loading={index < 5 ? 'eager' : 'lazy'} /><span className="feedback-card-shade" /><span className="feedback-card-meta"><b>{String(storyIndex + 1).padStart(2, '0')}</b><em>View full story</em></span></button>; })}</div></div>
+        <button className="feedback-carousel-arrow previous" type="button" aria-label="Previous student feedback" onPointerDown={(event) => event.stopPropagation()} onClick={(event) => { event.stopPropagation(); showPrevious(); }}>&larr;</button>
+        <button className="feedback-carousel-arrow next" type="button" aria-label="Next student feedback" onPointerDown={(event) => event.stopPropagation()} onClick={(event) => { event.stopPropagation(); showNext(); }}>&rarr;</button>
+      </div>
+      <div className="feedback-carousel-footer"><div className="feedback-dots" aria-label="Choose student feedback">{feedbackImages.map((image, index) => <button className={index === currentStory ? 'active' : ''} type="button" key={image.src} aria-label={`Show feedback ${index + 1}`} aria-current={index === currentStory ? 'true' : undefined} onClick={() => setCurrentImage(index)} />)}</div><span><i key={currentStory} />Continuous auto play</span></div>
+    </div>
+    {activeImage !== null && <div className="feedback-lightbox" role="dialog" aria-modal="true" aria-label={`Student feedback ${activeImage + 1}`} onClick={() => setActiveImage(null)}><button className="feedback-lightbox-close" type="button" aria-label="Close feedback" onClick={() => setActiveImage(null)}><X size={22} /></button><button className="feedback-lightbox-nav previous" type="button" aria-label="Previous feedback" onClick={(event) => { event.stopPropagation(); setActiveImage((activeImage + feedbackImages.length - 1) % feedbackImages.length); }}>&larr;</button><div className="feedback-lightbox-image" onClick={(event) => event.stopPropagation()}><img src={feedbackImages[activeImage].src} alt={feedbackImages[activeImage].alt} /><span>{String(activeImage + 1).padStart(2, '0')} / {feedbackImages.length}</span></div><button className="feedback-lightbox-nav next" type="button" aria-label="Next feedback" onClick={(event) => { event.stopPropagation(); setActiveImage((activeImage + 1) % feedbackImages.length); }}>&rarr;</button></div>}
+  </>;
 }
 
 function CertificateGallery() {
@@ -47,21 +118,30 @@ export default function App() {
   const [navScrolled, setNavScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const heroBackground = useRef<HTMLDivElement>(null);
+  const heroContent = useRef<HTMLDivElement>(null);
   const go = (id: string) => { setOpen(false); setActiveSection(id); document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); };
   useEffect(() => {
     let frame = 0;
     let target = 0;
     let current = 0;
+    let contentTarget = 0;
+    let contentCurrent = 0;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const compactScreen = window.matchMedia('(max-width: 680px)');
     let previousScrolled = false;
     let previousActive = 'home';
     const sectionIds = ['home', 'mentorship', 'results', 'start', 'contact'];
     const animateBackground = () => {
       current += (target - current) * 0.075;
+      contentCurrent += (contentTarget - contentCurrent) * 0.09;
       if (heroBackground.current) heroBackground.current.style.transform = `translate3d(0, ${current.toFixed(2)}px, 0)`;
-      frame = Math.abs(target - current) > 0.08 ? requestAnimationFrame(animateBackground) : 0;
+      if (heroContent.current) heroContent.current.style.transform = `translate3d(0, ${contentCurrent.toFixed(2)}px, 0)`;
+      frame = Math.abs(target - current) > 0.08 || Math.abs(contentTarget - contentCurrent) > 0.08 ? requestAnimationFrame(animateBackground) : 0;
     };
     const updateNavigation = () => {
-      target = Math.min(window.scrollY * 0.1, 56);
+      const mobile = compactScreen.matches;
+      target = reduceMotion.matches ? 0 : Math.min(window.scrollY * (mobile ? 0.06 : 0.16), mobile ? 36 : 110);
+      contentTarget = reduceMotion.matches ? 0 : -Math.min(window.scrollY * (mobile ? 0.025 : 0.07), mobile ? 18 : 52);
       const nowScrolled = window.scrollY > 80;
       if (nowScrolled !== previousScrolled) {
         previousScrolled = nowScrolled;
@@ -127,7 +207,7 @@ export default function App() {
         <button className="cta mini nav-talk" onClick={() => go('start')}>Start Learning <ArrowRight size={15} /></button>
         <button className="menu" onClick={() => setOpen(!open)} aria-label="Toggle navigation">{open ? <X /> : <Menu />}</button>
       </nav>
-      <div className="shell hero-grid">
+      <div className="shell hero-grid" ref={heroContent}>
         <div>
           <span className="eyebrow">FOR DISCIPLINED TRADERS</span>
           <h1>Trade with <i>clarity.</i><br />Grow with <i>confidence.</i></h1>
@@ -162,7 +242,7 @@ export default function App() {
     <CertificateGallery />
 
     <section className="final reveal" data-reveal id="start">
-      <div className="final-cta feedback-showcase"><div className="feedback-copy"><span className="label">STUDENT FEEDBACK</span><h2>Words that<br /><i>mean everything.</i></h2><p>Real progress is more than a result on a chart. It is the confidence, clarity and gratitude our students carry forward.</p><div className="feedback-author"><span>✓</span><div><b>Shanaka</b><small>Krish FX student</small></div></div></div><div className="feedback-frame"><div className="feedback-frame-top"><span>Student message</span><span>★</span></div><img src="/student-feedback-shanaka.jpeg" alt="Student feedback message from Shanaka" /><div className="feedback-frame-bottom">A journey built with discipline and support.</div></div></div>
+      <FeedbackShowcase />
       <footer className="site-footer" id="contact"><div className="shell footer-content">
         <div className="footer-brand"><Brand onClick={() => go('home')} /><p>Build your swing-trading process with clarity, discipline and confidence.</p></div>
         <div className="footer-column"><h3>Quick Links</h3><button className={activeSection === 'home' ? 'active' : ''} onClick={() => go('home')}>Home</button><button className={activeSection === 'mentorship' ? 'active' : ''} onClick={() => go('mentorship')}>Mentorship</button><button className={activeSection === 'results' ? 'active' : ''} onClick={() => go('results')}>Student Results</button><button className={activeSection === 'start' ? 'active' : ''} onClick={() => go('start')}>Feedback</button><button className={activeSection === 'contact' ? 'active' : ''} onClick={() => go('contact')}>Contact Us</button></div>
