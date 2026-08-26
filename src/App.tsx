@@ -45,13 +45,16 @@ function MentorToolkit() {
 export default function App() {
   const [open, setOpen] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const heroBackground = useRef<HTMLDivElement>(null);
-  const go = (id: string) => { setOpen(false); document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); };
+  const go = (id: string) => { setOpen(false); setActiveSection(id); document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); };
   useEffect(() => {
     let frame = 0;
     let target = 0;
     let current = 0;
     let previousScrolled = false;
+    let previousActive = 'home';
+    const sectionIds = ['home', 'mentorship', 'results', 'start', 'contact'];
     const animateBackground = () => {
       current += (target - current) * 0.075;
       if (heroBackground.current) heroBackground.current.style.transform = `translate3d(0, ${current.toFixed(2)}px, 0)`;
@@ -63,6 +66,17 @@ export default function App() {
       if (nowScrolled !== previousScrolled) {
         previousScrolled = nowScrolled;
         setNavScrolled(nowScrolled);
+      }
+      const marker = window.scrollY + window.innerHeight * 0.34;
+      let nextActive = 'home';
+      sectionIds.forEach((id) => {
+        const section = document.getElementById(id);
+        if (section && section.getBoundingClientRect().top + window.scrollY <= marker) nextActive = id;
+      });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 24) nextActive = 'contact';
+      if (nextActive !== previousActive) {
+        previousActive = nextActive;
+        setActiveSection(nextActive);
       }
       if (!frame) frame = requestAnimationFrame(animateBackground);
     };
@@ -104,11 +118,11 @@ export default function App() {
       <nav className={`nav shell${navScrolled ? ' scrolled' : ''}`}>
         <Brand onClick={() => go('home')} />
         <div className={open ? 'links open' : 'links'}>
-          <button onClick={() => go('home')}>Home</button>
-          <button onClick={() => go('mentorship')}>Mentorship</button>
-          <button onClick={() => go('results')}>Student Results</button>
-          <button onClick={() => go('start')}>Feedback</button>
-          <button onClick={() => go('contact')}>Contact Us</button>
+          <button className={activeSection === 'home' ? 'active' : ''} aria-current={activeSection === 'home' ? 'page' : undefined} onClick={() => go('home')}>Home</button>
+          <button className={activeSection === 'mentorship' ? 'active' : ''} aria-current={activeSection === 'mentorship' ? 'page' : undefined} onClick={() => go('mentorship')}>Mentorship</button>
+          <button className={activeSection === 'results' ? 'active' : ''} aria-current={activeSection === 'results' ? 'page' : undefined} onClick={() => go('results')}>Student Results</button>
+          <button className={activeSection === 'start' ? 'active' : ''} aria-current={activeSection === 'start' ? 'page' : undefined} onClick={() => go('start')}>Feedback</button>
+          <button className={activeSection === 'contact' ? 'active' : ''} aria-current={activeSection === 'contact' ? 'page' : undefined} onClick={() => go('contact')}>Contact Us</button>
         </div>
         <button className="cta mini nav-talk" onClick={() => go('start')}>Start Learning <ArrowRight size={15} /></button>
         <button className="menu" onClick={() => setOpen(!open)} aria-label="Toggle navigation">{open ? <X /> : <Menu />}</button>
@@ -151,7 +165,7 @@ export default function App() {
       <div className="final-cta feedback-showcase"><div className="feedback-copy"><span className="label">STUDENT FEEDBACK</span><h2>Words that<br /><i>mean everything.</i></h2><p>Real progress is more than a result on a chart. It is the confidence, clarity and gratitude our students carry forward.</p><div className="feedback-author"><span>✓</span><div><b>Shanaka</b><small>Krish FX student</small></div></div></div><div className="feedback-frame"><div className="feedback-frame-top"><span>Student message</span><span>★</span></div><img src="/student-feedback-shanaka.jpeg" alt="Student feedback message from Shanaka" /><div className="feedback-frame-bottom">A journey built with discipline and support.</div></div></div>
       <footer className="site-footer" id="contact"><div className="shell footer-content">
         <div className="footer-brand"><Brand onClick={() => go('home')} /><p>Build your swing-trading process with clarity, discipline and confidence.</p></div>
-        <div className="footer-column"><h3>Quick Links</h3><button onClick={() => go('home')}>Home</button><button onClick={() => go('mentorship')}>Mentorship</button><button onClick={() => go('results')}>Student Results</button><button onClick={() => go('start')}>Join Mentorship</button></div>
+        <div className="footer-column"><h3>Quick Links</h3><button className={activeSection === 'home' ? 'active' : ''} onClick={() => go('home')}>Home</button><button className={activeSection === 'mentorship' ? 'active' : ''} onClick={() => go('mentorship')}>Mentorship</button><button className={activeSection === 'results' ? 'active' : ''} onClick={() => go('results')}>Student Results</button><button className={activeSection === 'start' ? 'active' : ''} onClick={() => go('start')}>Feedback</button><button className={activeSection === 'contact' ? 'active' : ''} onClick={() => go('contact')}>Contact Us</button></div>
         <div className="footer-column"><h3>Join the Community</h3><a href="https://chat.whatsapp.com/K20nr41lF9IFTlsU1pxGJu?s=cl&p=i&mlu=4" target="_blank" rel="noreferrer"><MessageCircle size={17} /> WhatsApp Group</a><a href="https://t.me/KrishFX2" target="_blank" rel="noreferrer"><Send size={17} /> Telegram Channel</a><a href="https://youtube.com/@krishfx1?si=P-7wdK1sP6Xk-hFU" target="_blank" rel="noreferrer"><span className="youtube-icon">▶</span> YouTube</a><a href="https://www.facebook.com/share/1BjMFcZwW3/?mibextid=wwXIfr" target="_blank" rel="noreferrer"><span className="facebook-icon">f</span> Facebook</a></div>
         <div className="footer-column"><h3>Important</h3><span>Educational content only</span><span>Trading involves risk</span><span>Trade responsibly</span></div>
       </div><div className="shell copyright">© 2026 Krish FX Swing Lab. All Rights Reserved.</div></footer>
