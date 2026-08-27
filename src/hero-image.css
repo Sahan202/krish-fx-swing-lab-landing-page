@@ -4,7 +4,7 @@
   background-image:
     linear-gradient(90deg,rgba(7,15,10,.97) 0%,rgba(8,18,12,.89) 35%,rgba(9,18,12,.34) 62%,rgba(7,15,10,.08) 100%),
     linear-gradient(0deg,rgba(7,15,10,.43),transparent 42%),
-    url('/krish-fx-main-image.jpeg') !important;
+    url('/krish-fx-hero-new.png') !important;
   background-size:cover;
   background-position:center;
 }
@@ -18,5 +18,5 @@
   .hero-grid{grid-template-columns:1fr}
 }
 @media (max-width:680px){
-  .hero{min-height:720px;background-position:62% center;background-image:linear-gradient(90deg,rgba(7,15,10,.94),rgba(7,15,10,.59)),linear-gradient(0deg,rgba(7,15,10,.52),transparent 55%),url('/krish-fx-main-image.jpeg') !important}
+  .hero{min-height:720px;background-position:62% center;background-image:linear-gradient(90deg,rgba(7,15,10,.94),rgba(7,15,10,.59)),linear-gradient(0deg,rgba(7,15,10,.52),transparent 55%),url('/krish-fx-hero-new.png') !important}
 }
