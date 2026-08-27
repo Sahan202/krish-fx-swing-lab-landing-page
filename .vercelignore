@@ -1,0 +1,5 @@
+.git
+.netlify
+node_modules
+out/student-result-highlight.mp4
+public/student-result-highlight.mp4
