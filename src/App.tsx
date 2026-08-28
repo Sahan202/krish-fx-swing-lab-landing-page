@@ -18,6 +18,14 @@ const certificates = [
 
 const feedbackImages = [
   { src: '/student-feedback-shanaka.jpeg', alt: 'Student feedback message from Shanaka' },
+  { src: '/student-feedback-14.jpeg', alt: 'Student feedback message from Sa DEW' },
+  { src: '/student-feedback-15.jpeg', alt: 'Student feedback message 15' },
+  { src: '/student-feedback-16.jpeg', alt: 'Student feedback message 16' },
+  { src: '/student-feedback-17.jpeg', alt: 'Student feedback message 17' },
+  { src: '/student-feedback-18.jpeg', alt: 'Student feedback message 18' },
+  { src: '/student-feedback-19.jpeg', alt: 'Student feedback message 19' },
+  { src: '/student-feedback-20.jpeg', alt: 'Student feedback message 20' },
+  { src: '/student-feedback-21.jpeg', alt: 'Student feedback message 21' },
   ...Array.from({ length: 12 }, (_, index) => ({
     src: `/student-feedback-${String(index + 1).padStart(2, '0')}.jpeg`,
     alt: `Krish FX student feedback and trading result ${index + 1}`,
@@ -80,7 +88,7 @@ function FeedbackShowcase() {
     <div className="final-cta feedback-showcase">
       <div className="feedback-heading"><div className="feedback-copy"><span className="label">STUDENT FEEDBACK</span><h2>Words that <i>mean everything.</i></h2><p>Real progress is more than a result on a chart. It is the confidence, clarity and gratitude our students carry forward.</p></div><div className="feedback-proof"><strong>{feedbackImages.length}</strong><span>Real student stories</span><small>Four stories in view</small></div></div>
       <div className="feedback-carousel" onPointerDown={startDrag} onPointerUp={finishDrag} onPointerCancel={() => { dragStart.current = null; }}>
-        <div className="feedback-gallery" aria-label="Autoplaying student feedback carousel"><div className={`feedback-track${isResetting ? ' resetting' : ''}`} style={{ '--feedback-index': currentImage } as React.CSSProperties} onTransitionEnd={finishSlide}>{carouselImages.map((image, index) => { const storyIndex = index % feedbackImages.length; return <button className="feedback-card" type="button" key={`${image.src}-${index}`} onClick={() => { if (dragged.current) { dragged.current = false; return; } setActiveImage(storyIndex); }} aria-label={`Open student feedback ${storyIndex + 1}`}><img src={image.src} alt={image.alt} loading={index < 5 ? 'eager' : 'lazy'} /><span className="feedback-card-shade" /><span className="feedback-card-meta"><b>{String(storyIndex + 1).padStart(2, '0')}</b><em>View full story</em></span></button>; })}</div></div>
+        <div className="feedback-gallery" aria-label="Autoplaying student feedback carousel"><div className={`feedback-track${isResetting ? ' resetting' : ''}`} style={{ '--feedback-index': currentImage } as React.CSSProperties} onTransitionEnd={finishSlide}>{carouselImages.map((image, index) => { const storyIndex = index % feedbackImages.length; return <button className="feedback-card" type="button" key={`${image.src}-${index}`} onClick={() => { if (dragged.current) { dragged.current = false; return; } setActiveImage(storyIndex); }} aria-label={`Open student feedback ${storyIndex + 1}`}><img src={image.src} alt={image.alt} loading={index < 2 ? 'eager' : 'lazy'} /><span className="feedback-card-shade" /><span className="feedback-card-meta"><b>{String(storyIndex + 1).padStart(2, '0')}</b><em>View full story</em></span></button>; })}</div></div>
         <button className="feedback-carousel-arrow previous" type="button" aria-label="Previous student feedback" onPointerDown={(event) => event.stopPropagation()} onClick={(event) => { event.stopPropagation(); showPrevious(); }}>&larr;</button>
         <button className="feedback-carousel-arrow next" type="button" aria-label="Next student feedback" onPointerDown={(event) => event.stopPropagation()} onClick={(event) => { event.stopPropagation(); showNext(); }}>&rarr;</button>
       </div>
@@ -174,7 +182,7 @@ export default function App() {
       const startedAt = performance.now();
       const tick = (time: number) => {
         const progress = Math.min((time - startedAt) / 1300, 1);
-        if (resultCount) resultCount.textContent = `${Math.round(200 * (1 - Math.pow(1 - progress, 3)))}+`;
+        if (resultCount) resultCount.textContent = `${Math.round(50 * (1 - Math.pow(1 - progress, 3)))}+`;
         if (progress < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
@@ -234,7 +242,7 @@ export default function App() {
       <div className="lessons">{[['01', 'Market Foundations'], ['02', 'The Swing Framework'], ['03', 'Risk & Trade Management']].map(([number, title]) => <div key={number}><span>{number}</span><b>{title}</b><ArrowRight size={18} /></div>)}</div>
     </div></section>
 
-    <section className="community shell" id="results"><div><span className="label">STUDENT RESULTS</span><h2>Real traders.<br /><i>Real progress.</i></h2><p>See how disciplined practice, clear structure and a focused trading plan help students move forward.</p><div className="result-stats"><span><b>200+</b>Students mentored</span><span><b>4H</b>Swing trading focus</span></div></div><blockquote>“The mentorship gave me the structure I was missing. I no longer feel like I’m guessing.”<small>- Krish FX student</small></blockquote></section>
+    <section className="community shell" id="results"><div><span className="label">STUDENT RESULTS</span><h2>Real traders.<br /><i>Real progress.</i></h2><p>See how disciplined practice, clear structure and a focused trading plan help students move forward.</p><div className="result-stats"><span><b>50+</b>Students mentored</span><span><b>4H</b>Swing trading focus</span></div></div><blockquote>“The mentorship gave me the structure I was missing. I no longer feel like I’m guessing.”<small>- Krish FX student</small></blockquote></section>
 
     <MentorToolkit />
 
@@ -251,3 +259,4 @@ export default function App() {
     </section>
   </main>;
 }
+

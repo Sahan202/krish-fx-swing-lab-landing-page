@@ -21,3 +21,7 @@
 @media(max-width:680px){.hero-parallax-bg{background-image:url('/krish-fx-hero-new.png')!important;background-color:transparent!important;background-blend-mode:normal!important;filter:none!important;opacity:1!important}.hero:before,.hero:after{display:none!important;opacity:0!important;background:transparent!important}}
 
 @media(max-width:680px){.hero-parallax-bg{background-size:100% auto!important;background-position:center bottom 43px!important;background-repeat:no-repeat!important}}
+
+.risk-card{background:#06284b!important}.site-footer{background:#06284b!important}
+
+
