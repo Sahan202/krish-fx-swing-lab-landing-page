@@ -24,4 +24,4 @@
 
 .risk-card{background:#06284b!important}.site-footer{background:#06284b!important}
 
-
+.hero-login{min-width:116px;justify-content:center;padding:13px 18px!important;border:1px solid rgba(255,255,255,.62)!important;border-radius:999px!important;background:rgba(255,255,255,.12)!important;box-shadow:0 10px 24px rgba(3,31,108,.18);font-weight:700!important;letter-spacing:.01em;backdrop-filter:blur(8px);transition:transform .22s ease,background .22s ease,box-shadow .22s ease!important}.hero-login svg{transition:transform .22s ease}.hero-login:hover{transform:translateY(-2px);background:rgba(255,255,255,.24)!important;box-shadow:0 15px 30px rgba(3,31,108,.3)}.hero-login:hover svg{transform:translateX(3px)}.hero-login:focus-visible{outline:2px solid #fff;outline-offset:4px}

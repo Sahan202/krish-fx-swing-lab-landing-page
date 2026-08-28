@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, BarChart3, CheckCircle2, CirclePlay, Menu, MessageCircle, Send, ShieldCheck, TrendingUp, Users, X } from 'lucide-react';
+import { ArrowRight, BarChart3, CheckCircle2, LogIn, Menu, MessageCircle, Send, ShieldCheck, TrendingUp, Users, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 const benefits = [
@@ -211,7 +211,15 @@ export default function App() {
           <button className={activeSection === 'start' ? 'active' : ''} aria-current={activeSection === 'start' ? 'page' : undefined} onClick={() => go('start')}>Feedback</button>
           <button className={activeSection === 'contact' ? 'active' : ''} aria-current={activeSection === 'contact' ? 'page' : undefined} onClick={() => go('contact')}>Contact Us</button>
         </div>
-        <button className="cta mini nav-talk" onClick={() => go('start')}>Start Learning <ArrowRight size={15} /></button>
+        <button
+          className="cta mini nav-talk"
+          type="button"
+          onClick={() => {
+            window.location.href = '/login';
+          }}
+        >
+          Start Learning <ArrowRight size={15} aria-hidden="true" />
+        </button>
         <button className="menu" onClick={() => setOpen(!open)} aria-label="Toggle navigation">{open ? <X /> : <Menu />}</button>
       </nav>
       <div className="shell hero-grid" ref={heroContent}>
@@ -220,8 +228,16 @@ export default function App() {
           <h1>Trade with <i>clarity.</i><br />Grow with <i>confidence.</i></h1>
           <p>Master a refined swing-trading framework designed to help you see opportunity, manage risk, and move with intention.</p>
           <div className="actions">
-            <button className="cta enroll-cta" onClick={() => go('mentorship')}>Enroll now <ArrowRight size={18} /></button>
-            <button className="watch" onClick={() => go('mentorship')}><CirclePlay size={20} /> See how it works</button>
+            <button className="cta enroll-cta" onClick={() => { window.location.href = '/register'; }}>Enroll now <ArrowRight size={18} /></button>
+            <button
+              className="watch hero-login"
+              type="button"
+              onClick={() => {
+                window.location.href = '/login';
+              }}
+            >
+              <LogIn size={16} aria-hidden="true" /> Login
+            </button>
           </div>
           <small className="trust"><Users size={16} /> Built for traders who value process over noise.</small>
           <div className="hero-insight"><span><b>4H</b> Swing-trading focus</span><span><b>01</b> Refined framework</span><span><b>LIVE</b> Mentorship support</span></div>
